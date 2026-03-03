@@ -14,7 +14,7 @@ app.post('/chat', async (req, res) => {
     // Add system prompt to guide the AI's behavior
     const systemMessage = {
       role: 'system',
-      content: 'You are a helpful assistant called Cal. You are concise, friendly and slightly witty.'
+      content: 'You are a helpful assistant called Zentara. You are concise, friendly and slightly witty.'
     }
     // Send messages to Ollama API
     const response = await fetch('http://localhost:11434/api/chat', {

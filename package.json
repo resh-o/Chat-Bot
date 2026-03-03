@@ -1,0 +1,26 @@
+{
+  "name": "zentara",
+  "version": "1.0.0",
+  "description": "A minimal, local AI chat application powered by Ollama. Zentara runs entirely on your machine - no cloud, no API costs, no data leaving your device.",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && node index.js",
+    "client": "cd frontend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resh-o/Chat-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/resh-o/Chat-Bot/issues"
+  },
+  "homepage": "https://github.com/resh-o/Chat-Bot#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
