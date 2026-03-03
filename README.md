@@ -1,6 +1,6 @@
 # Zentara 🏔️
 
-A minimal, local AI chat application powered by Ollama. Zentara runs entirely on your machine — no cloud, no API costs, no data leaving your device.
+A minimal, local AI chat application powered by Ollama. Zentara runs entirely on your machine - no cloud, no API costs, no data leaving your device.
 
 ---
 
@@ -8,15 +8,15 @@ A minimal, local AI chat application powered by Ollama. Zentara runs entirely on
 
 - **Frontend** — React
 - **Backend** — Node.js + Express
-- **AI** — Ollama (Llama 3.2)
+- **AI** — Ollama (Llama 3.2:1b)
 
 ---
 
 ## Features
 
 - 💬 Real-time AI chat
-- 🧠 Conversation memory — Zentara remembers context within a session
-- 🔒 Fully local — your conversations never leave your machine
+- 🧠 Conversation memory, Zentara remembers context within a session
+- 🔒 Fully local, your conversations never leave your machine
 - 🗑️ Clear chat button
 - ⌨️ Enter key to send
 
@@ -83,7 +83,7 @@ zentara/
 To change the AI model, update the model name in `backend/index.js`:
 
 ```js
-model: 'llama3.2' // swap for any Ollama model e.g. llama3.2:1b, mistral
+model: 'llama3.2' // swap for any Ollama model
 ```
 
 To give Zentara a different personality, edit the system prompt in `backend/index.js`:
