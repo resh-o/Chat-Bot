@@ -7,8 +7,13 @@ function App() {
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const clearChat = () => setMessages([])
   const bottomRef = useRef(null)
+
+  // Function to clear chat history and delete all messages from the database
+  const clearChat = async () => {
+    await fetch('http://localhost:3001/history', { method: 'DELETE' })
+    setMessages([])
+  }
 
   // Scroll to bottom whenever messages change
   useEffect(() => {
@@ -60,7 +65,7 @@ function App() {
             {msg.content}
           </div>
         ))}
-        
+
         {loading && (
           <div className="message assistant">
             <span className="thinking-dots">

@@ -56,6 +56,12 @@ app.get('/history', (req, res) => {
   res.json({ messages })
 })
 
+// Endpoint to clear chat history and delete all messages from the database
+app.delete('/history', (req, res) => {
+  db.prepare('DELETE FROM messages').run()
+  res.json({ success: true })
+})
+
 // Start the server
 app.listen(3001, () => {
     console.log('Server is running on port 3001')
