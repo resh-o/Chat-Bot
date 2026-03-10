@@ -8,6 +8,7 @@ A minimal, local AI chat application powered by Ollama. Zentara runs entirely on
 
 - **Frontend** — React
 - **Backend** — Node.js + Express
+- **Database** — PostGre + Supabase
 - **AI** — Ollama (Llama 3.2:1b)
 
 ---
