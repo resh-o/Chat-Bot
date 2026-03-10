@@ -518,3 +518,34 @@ body::before {
   border: 1px solid var(--border-glow);
   width: 100%;
 }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-tts {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  padding: 7px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-tts:hover {
+  border-color: var(--teal-mid);
+  color: var(--teal-light);
+}
+
+.btn-tts.active {
+  border-color: var(--teal-mid);
+  color: var(--teal-light);
+  background: rgba(26,122,154,0.12);
+  box-shadow: 0 0 12px rgba(26,122,154,0.2);
+}
