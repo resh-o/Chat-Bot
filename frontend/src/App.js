@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import logo from './logo.svg'
+import ReactMarkdown from 'react-markdown'
 
 function App() {
   // State to hold messages and current input
@@ -93,9 +94,12 @@ function App() {
   return (
     <div className="chat-container">
       <div className="chat-header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src={logo} alt="logo" width={40} />
-          <span>Zentara</span>
+        <div className="brand">
+          <img src={logo} alt="logo" />
+          <div>
+            <div className="brand-name">Zentara</div>
+            <div className="brand-tag">AI Assistant</div>
+          </div>
         </div>
         <button className="btn-clear" onClick={clearChat}>Clear</button>
       </div>
@@ -119,7 +123,13 @@ function App() {
               </div>
             ) : (
               <div className="message-content">
-                {msg.content}
+                {msg.role === 'assistant' ? (
+                  <div className="markdown-body">
+                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                  </div>
+                ) : (
+                  msg.content
+                )}
                 {msg.role === 'user' && (
                   <button className="btn-edit" onClick={() => startEdit(index, msg.content)}>✏️</button>
                 )}
@@ -130,11 +140,9 @@ function App() {
 
         {loading && (
           <div className="message assistant">
-            <span className="thinking-dots">
-              <span>•</span>
-              <span>•</span>
-              <span>•</span>
-            </span>
+            <div className="thinking-dots">
+              <span/><span/><span/>
+            </div>
           </div>
         )}
         <div ref={bottomRef} /> 

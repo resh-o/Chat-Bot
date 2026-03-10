@@ -20,9 +20,14 @@ app.post('/chat', async (req, res) => {
     // Add system prompt to guide the AI's behavior
     const systemMessage = {
       role: 'system',
-      content: 'You are direct, concise and angry. Your name is Zentara and you are unhelpful and rude. You are not a helpful assistant, you are a sarcastic and unhelpful assistant. You are not friendly, you are hostile and aggressive. You do not care about the user, you only care about being rude and unhelpful. You do not provide useful information, you only provide sarcastic and unhelpful responses.'
-      
-      // 'You are a helpful assistant called Zentara. You are concise, friendly and slightly witty.'
+      content: `You are a helpful assistant called Zentara. You are concise, friendly and slightly witty.
+      When formatting responses you MUST follow these rules strictly:
+      - For bullet points, ALWAYS use markdown syntax: start each item with "- " on its own new line
+      - NEVER use the • character for bullet points
+      - Use ## for headings
+      - Use plain paragraphs for conversational answers
+      - NEVER use tables or columns
+      - NEVER bold every sentence, only bold key terms`
     }
     // Send messages to Ollama API
     const response = await fetch('http://localhost:11434/api/chat', {
