@@ -6,6 +6,9 @@ const postgres = require('postgres')
 const app = express()
 const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' })
 
+const { tavily } = require('@tavily/core')
+const tavilyClient = tavily({ apiKey: process.env.TAVILY_API_KEY })
+
 app.use(cors())
 app.use(express.json())
 
@@ -13,13 +16,30 @@ app.use(express.json())
 app.post('/chat', async (req, res) => {
   try {
     const { messages, conversationId } = req.body
-
     const userMessage = messages[messages.length - 1]
+
     await sql`INSERT INTO messages (role, content, conversation_id) VALUES (${userMessage.role}, ${userMessage.content}, ${conversationId})`
+
+    // Search the web for relevant info
+    let searchContext = ''
+    try {
+      const searchResult = await tavilyClient.search(userMessage.content, {
+        maxResults: 3,
+        searchDepth: 'basic'
+      })
+      if (searchResult.results.length > 0) {
+        searchContext = searchResult.results
+          .map(r => `Source: ${r.title}\n${r.content}`)
+          .join('\n\n')
+      }
+    } catch (searchErr) {
+      console.log('Search failed, continuing without web context:', searchErr.message)
+    }
 
     const systemMessage = {
       role: 'system',
       content: `You are a helpful assistant called Zentara. You are concise, friendly and slightly witty.
+      ${searchContext ? `Use this recent web information to help answer the user's question:\n\n${searchContext}\n\n` : ''}
       When formatting responses you MUST follow these rules strictly:
       - For bullet points, ALWAYS use markdown syntax: start each item with "- " on its own new line
       - NEVER use the • character for bullet points
